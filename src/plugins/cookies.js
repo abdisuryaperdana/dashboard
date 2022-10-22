@@ -8,7 +8,7 @@ const setCookies = (name,value,{datetime}) =>{
 };
 
 const getCookies = (name) => {
-    const cookies = `;${document.cookie}`;
+    const cookies = `; ${document.cookie}`;
     const byValue = cookies.split(`; ${name}=`);
     if (byValue.length==2) return byValue.pop().split(';').shift();
 
@@ -23,6 +23,7 @@ const certCookies = () => {
     const token = getCookies('CERT');
     // console.log(token);
     if (token){
+        
         const{id, n:name, ri:role, exp} = parseJwt(token);
         if(!id) return delCookies('CERT');
         return {
